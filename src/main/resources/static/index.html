@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div class="container">
+    <div class="register" id="register">
+        <input id="user-name" placeholder="Enter your name" name="userName" margin="normal"/>
+        <button type="button" id="connect-button">Connect</button>
+    </div>
+    <div class="chat-box" id="chat-box" style="display: none;">
+        <div class="member-list">
+            <ul id="member-list">
+                <li class="member active" data-tab="CHATROOM">Chatroom</li>
+            </ul>
+        </div>
+        <div class="chat-content" id="chat-content">
+            <ul class="chat-messages" id="chat-messages"></ul>
+            <div class="send-message">
+                <input type="text" class="input-message" id="input-message" placeholder="Enter the message"/>
+                <button type="button" class="send-button" id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add SockJS and StompJS libraries from CDNs -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
+
+<!--// const onPrivateMessage = (payload) => {-->
+<!--//     const payloadData = JSON.parse(payload.body);-->
+<!--//     switch (payloadData.status) {-->
+<!--//         case 'JOIN':-->
+<!--//             handleUserJoin(payloadData);-->
+<!--//             break;-->
+<!--//         case 'LEAVE':-->
+<!--//             handleUserLeave(payloadData);-->
+<!--//             break;-->
+<!--//         case 'HANDSHAKE':-->
+<!--//             handleHandshake(payloadData);-->
+<!--//             break;-->
+<!--//         case 'HANDSHAKE_BACK':-->
+<!--//             handleHandshakeBack(payloadData);-->
+<!--//             break;-->
+<!--//         case 'CHAT':-->
+<!--//             privateChats.get(payloadData.senderName).push(payloadData);-->
+<!--//             if (tab === payloadData.senderName) {-->
+<!--//                 updatePrivateChats();-->
+<!--//             }-->
+<!--//             // handleChatMessage(payloadData);-->
+<!--//             break;-->
+<!--//         default:-->
+<!--//             console.error('Unknown message status:', payloadData.status);-->
+<!--//             break;-->
+<!--//     }-->
+<!--// };-->
+<!--//-->
+<!--// const handleUserJoin = (payloadData) => {-->
+<!--//     const newUser = payloadData.senderName;-->
+<!--//     if (!privateChats.has(newUser)) {-->
+<!--//         privateChats.set(newUser, []);-->
+<!--//         updateMemberList(payloadData.users);-->
+<!--//         // Send a handshake message back to confirm the connection-->
+<!--//         sendHandshake(newUser);-->
+<!--//     }-->
+<!--// };-->
+<!--//-->
+<!--// const handleHandshake = (payloadData) => {-->
+<!--//     const existingUser = payloadData.senderName;-->
+<!--//     if (!privateChats.has(existingUser)) {-->
+<!--//         privateChats.set(existingUser, []);-->
+<!--//         updateMemberList(payloadData.users);-->
+<!--//     }-->
+<!--//     // Send a handshake back to confirm the connection-->
+<!--//     sendHandshakeBack(existingUser);-->
+<!--// };-->
+<!--//-->
+<!--// const sendHandshake = (receiverName) => {-->
+<!--//     const handshakeMessage = {-->
+<!--//         senderName: userData.username,-->
+<!--//         receiverName: receiverName,-->
+<!--//         status: 'HANDSHAKE'-->
+<!--//     };-->
+<!--//     stompClient.send('/app/private-message', {}, JSON.stringify(handshakeMessage));-->
+<!--// };-->
+<!--//-->
+<!--// const sendHandshakeBack = (receiverName) => {-->
+<!--//     const handshakeBackMessage = {-->
+<!--//         senderName: userData.username,-->
+<!--//         receiverName: receiverName,-->
+<!--//         status: 'HANDSHAKE_BACK'-->
+<!--//     };-->
+<!--//     stompClient.send('/app/private-message', {}, JSON.stringify(handshakeBackMessage));-->
+<!--// };-->
